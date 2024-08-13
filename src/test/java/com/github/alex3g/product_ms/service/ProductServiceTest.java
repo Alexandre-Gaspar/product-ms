@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,26 @@ public class ProductServiceTest {
         assertEquals(productToCreate.getName(), fetchedProduct.get().getName(), "Product name should match");
         assertEquals(productToCreate.getDescription(), fetchedProduct.get().getDescription(), "Product description should match");
         assertEquals(productToCreate.getPrice(), fetchedProduct.get().getPrice(), "Product price should match");
+    }
+
+    @Test
+    void shouldNotGetProductById() {
+        ProductDTO request = Fixture.from(ProductDTO.class).gimme("valid");
+        Optional<ProductDTO> createdProduct = service.create(request);
+
+        assertTrue(createdProduct.isPresent(), "Product should be created successfully.");
+
+        Long nonExistentId = -1L;
+
+        // Assert: Guarantees that both IDs doesn't match
+        assertNotEquals(createdProduct.get().getId(), nonExistentId, "The generated ID shouldn't be match the created product ID");
+
+        // Try fetch a product with non-existent id
+        Optional<ProductDTO> fetchedProduct = service.getById(nonExistentId);
+
+        // Assert: Guarantees that no product will be returned
+        assertFalse(fetchedProduct.isPresent(), "Product with non-existent ID should not be fetched.");
+
     }
 
     @Test
