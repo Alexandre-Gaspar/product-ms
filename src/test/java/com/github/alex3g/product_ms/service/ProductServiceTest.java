@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -137,5 +136,24 @@ public class ProductServiceTest {
         boolean inactive = service.inactive(id);
 
         assertTrue(inactive, "Product availability should be true");
+    }
+
+    @Test
+    void shouldNotInactiveProduct() {
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        Optional<ProductDTO> createdProduct = service.create(productToCreate);
+
+        assertTrue(createdProduct.isPresent(), "Product should be created successfully.");;
+
+        Long nonExistentId = -1L;
+
+        // Assert: Guarantees that both IDs doesn't match
+        assertNotEquals(createdProduct.get().getId(), nonExistentId, "The generated ID shouldn't be match the created product ID");
+
+        // Attempt to inactive a product with a non-existent ID
+        boolean result = service.inactive(nonExistentId);
+
+        // Assert: Guarantees that no product will be returned
+        assertFalse(result, "Inactive operation should return false for non-existent product ID.");
     }
 }
