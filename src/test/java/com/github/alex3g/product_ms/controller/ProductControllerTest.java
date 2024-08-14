@@ -80,4 +80,16 @@ public class ProductControllerTest {
                         .header(AUTHORIZATION, "Bearer foo"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void shouldNotGetById() throws Exception {
+        Product productToCreate = Fixture.from(Product.class).gimme("valid");
+        repository.save(productToCreate);
+
+        Long nonExistentId = -1L;
+
+        mvc.perform(get("/products/{id}", nonExistentId)
+                        .header(AUTHORIZATION, "Bearer foo"))
+                .andExpect(status().isNotFound());
+    }
 }
