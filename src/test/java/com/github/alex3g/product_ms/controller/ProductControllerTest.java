@@ -116,4 +116,21 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.description").value(productToUpdate.getDescription()))
                 .andExpect(jsonPath("$.price").value(productToUpdate.getPrice()));
     }
+
+    @Test
+    void shouldNotUpdateProduct() throws Exception {
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        Product createdProduct = repository.save(modelMapper.map(productToCreate, Product.class));
+
+        Long nonExistentId = 999L;
+
+        ProductDTO productToUpdate = Fixture.from(ProductDTO.class).gimme("valid-update");
+        String productDataToUpdateAsString = objectMapper.writeValueAsString(productToUpdate);
+
+        mvc.perform(put("/products/{id}", nonExistentId)
+                        .header(AUTHORIZATION, "Bearer foo")
+                        .contentType(APPLICATION_JSON)
+                        .content(productDataToUpdateAsString))
+                .andExpect(status().isBadRequest());
+    }
 }
