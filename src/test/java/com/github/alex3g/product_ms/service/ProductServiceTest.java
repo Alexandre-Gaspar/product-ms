@@ -100,29 +100,23 @@ public class ProductServiceTest {
 
     @Test
     void shouldUpdateProduct() {
-        ProductDTO productToUpdate = Fixture.from(ProductDTO.class).gimme("valid");
-        Optional<ProductDTO> createdProduct = service.create(productToUpdate);
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
         assertTrue(createdProduct.isPresent(), "Product should be created successfully");
 
-        // Get the id of created product
+        // Get created product id
         Long id = createdProduct.get().getId();
 
         // Update
-        String newName = "Monitor";
-        String newDescription = "Esse com certeza é o melhor monitor LCD já criado pela empresa DELL desde os anos 2000. Monitor da marca DELL de 30 polegadas";
-        double newPrice = 7889.99;
-        productToUpdate.setName(newName);
-        productToUpdate.setDescription(newDescription);
-        productToUpdate.setPrice(newPrice);
-
+        ProductDTO productToUpdate = Fixture.from(ProductDTO.class).gimme("valid-update");
         Optional<ProductDTO> updatedProductDTO = service.update(id, productToUpdate);
 
         assertTrue(updatedProductDTO.isPresent(), "Product update should updated successfully");
 
-        assertEquals(newName, updatedProductDTO.get().getName(), "Product name should match");
-        assertEquals(newDescription, updatedProductDTO.get().getDescription(), "Product description should match");
-        assertEquals(newPrice, updatedProductDTO.get().getPrice(), "Product price should match");
+        assertEquals(productToUpdate.getName(), updatedProductDTO.get().getName(), "Product name should match");
+        assertEquals(productToUpdate.getDescription(), updatedProductDTO.get().getDescription(), "Product description should match");
+        assertEquals(productToUpdate.getPrice(), updatedProductDTO.get().getPrice(), "Product price should match");
     }
 
     @Test
