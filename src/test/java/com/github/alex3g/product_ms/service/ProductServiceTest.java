@@ -126,6 +126,26 @@ public class ProductServiceTest {
     }
 
     @Test
+    void shouldNotUpdateProduct() {
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        Optional<ProductDTO> createdProduct = service.create(productToCreate);
+
+        assertTrue(createdProduct.isPresent(), "Product should be created successfully.");
+
+        Long nonExistentId = -1L;
+
+        // Assert: Guarantees that non-existent ID isn't the same that created product
+        assertNotEquals(createdProduct.get().getId(), nonExistentId, "The generated id should not be match the created product ID");
+
+        // Try to update a product with a non-existent ID
+        ProductDTO productToUpdate = Fixture.from(ProductDTO.class).gimme("valid-update");
+        Optional<ProductDTO> updatedProduct = service.update(nonExistentId, productToUpdate);
+
+        // Assert: Verify if the product was not updated
+        assertFalse(updatedProduct.isPresent(), "Expected that the product doesn't update with a non-existent ID");
+    }
+
+    @Test
     void shouldInactiveProduct() {
         ProductDTO productToInactive = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToInactive);
