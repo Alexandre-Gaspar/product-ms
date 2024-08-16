@@ -153,4 +153,14 @@ public class ProductControllerTest {
         assertTrue(deletedProduct.isPresent(), "Product should still exist in the database");
         assertFalse(deletedProduct.get().isAvailable(), "Product should be inactive");
     }
+
+    @Test
+    void shouldNotInactiveProduct() throws Exception {
+        Long nonExistentId = 999L;
+
+        mvc.perform(delete("/products/{id}", nonExistentId)
+                        .header(AUTHORIZATION, "Bearer foo"))
+                .andExpect(status().isNotFound());
+    }
+
 }
