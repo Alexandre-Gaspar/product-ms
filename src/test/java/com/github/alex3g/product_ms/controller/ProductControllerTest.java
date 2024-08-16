@@ -89,10 +89,7 @@ public class ProductControllerTest {
 
     @Test
     void shouldNotGetById() throws Exception {
-        Product productToCreate = Fixture.from(Product.class).gimme("valid");
-        repository.save(productToCreate);
-
-        Long nonExistentId = -1L;
+        Long nonExistentId = 999L;
 
         mvc.perform(get("/products/{id}", nonExistentId)
                         .header(AUTHORIZATION, "Bearer foo"))
