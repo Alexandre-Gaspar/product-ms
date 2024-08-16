@@ -14,6 +14,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -132,5 +136,21 @@ public class ProductControllerTest {
                         .contentType(APPLICATION_JSON)
                         .content(productDataToUpdateAsString))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void shouldInactiveProduct() throws Exception {
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        Product createdProduct = repository.save(modelMapper.map(productToCreate, Product.class));
+
+        Long id = createdProduct.getId();
+
+        mvc.perform(delete("/products/{id}", id)
+                        .header(AUTHORIZATION, "Bearer foo"))
+                .andExpect(status().isNoContent());
+
+        Optional<Product> deletedProduct = repository.findById(id);
+        assertTrue(deletedProduct.isPresent(), "Product should still exist in the database");
+        assertFalse(deletedProduct.get().isAvailable(), "Product should be inactive");
     }
 }
