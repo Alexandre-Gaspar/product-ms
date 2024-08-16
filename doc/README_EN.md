@@ -1,6 +1,6 @@
 # Product-ms
 
-Read the Portuguese version [here](README_PT).
+Read the Portuguese version [here](../README.md).
 
 🎯 **Description**:  
 **Product-ms** is a microservice for managing products. It allows you to create, search, deactivate, and update products. The main focus of this project is learning unit testing techniques with JUnit5, validating fields in DTOs, and handling validation errors.
