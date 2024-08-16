@@ -1,95 +1,93 @@
 # Product-ms
 
-🎯 **Description**:  
-**Product-ms** is a microservice for managing products. It allows you to create, search, deactivate, and update products. The main focus of this project is learning unit testing techniques with JUnit5, validating fields in DTOs, and handling validation errors.
+Leia a versão em inglês [aqui](doc/README_EN.md).
 
-🔧 **Features**:  
-- Full CRUD for products.
-- Products are logically deleted: a field `available` is used to set whether a product is active (`true`) or inactive (`false`).
+🎯 **Descrição**:  
+O **Product-ms** é um microserviço para gerenciamento de produtos. Ele permite criar, pesquisar, inativar e atualizar produtos. O foco principal deste projeto é o aprendizado de técnicas de testes unitários com JUnit5, validação de campos em DTOs e tratamento de erros de validação.
 
-## Technologies Used
+🔧 **Funcionalidades**:
+- CRUD completo para produtos.
+- Produtos são logicamente excluídos: um campo `available` é usado para definir se um produto está ativo (`true`) ou inativo (`false`).
+
+## Tecnologias Usadas
 
 - **Java** 21
 - **Spring Boot** 3.3.2
 - **Maven** 3.9.7
 
-## Dependencies
+## Dependências
 
-- **SpringDoc Swagger OpenAPI** 2.6.0: For API documentation
-- **H2Database**: For testing environment
-- **PostgreSQL**: For cloud environment on Railway
-- **Lombok**: To eliminate boilerplate code
-- **ModelMapper** 3.2.1: To facilitate data transfer between DTO and Entity
-- **Fixture-factory** 3.1.0: For creating fixtures or templates for dummy data and facilitating test creation
-- **Spring Validation**: For validating DTO fields
-- **Spring Test**: For unit and integration testing
+- **SpringDoc Swagger OpenAPI** 2.6.0: Para documentação da API
+- **H2Database**: Para ambiente de teste
+- **PostgreSQL**: Para ambiente em nuvem no Railway
+- **Lombok**: Para eliminação de código boilerplate
+- **ModelMapper** 3.2.1: Para facilitar a transferência de dados entre a DTO e a Entidade
+- **Fixture-factory** 3.1.0: Para criação de fixtures ou templates para dados fictícios e facilitar a criação dos testes
+- **Spring Validation**: Para validação dos campos da DTO
+- **Spring Test**: Para testes unitários e de integração
 
-## Prerequisites
+## Pré-requisitos
 
-To run **Product-ms**, you need:
+Para rodar o **Product-ms**, você precisa de:
 - Java 17+
 - Spring Boot 3.x.x
-- IDE (such as IntelliJ, Eclipse, etc.)
-- Maven dependency manager
-- HTTP client (such as HTTPie, Insomnia, etc.) or browser to test the endpoints (the API is documented with Swagger)
+- IDE (como IntelliJ, Eclipse, etc.)
+- Gerenciador de dependências Maven
+- Cliente HTTP (como HTTPie, Insomnia, etc.) ou navegador para testar os endpoints (a API está documentada com Swagger)
 
-## Installation and Configuration
+## Instalação e Configuração
 
-1. Clone the repository:
+1. Clone o repositório:
     ```bash
-    git clone https://github.com/Alexandre-Gaspar/product-ms.git
+    git clone https://github.com/seu-usuario/product-ms.git
     ```
 
-2. Open the project in an IDE (such as IntelliJ or Eclipse) and reload Maven to download the dependencies (usually available through a "Play" button in the IDE interface).
+2. Abra o projeto em uma IDE (como IntelliJ ou Eclipse) e faça o reload do Maven para baixar as dependências (geralmente disponível através de um botão "Play" na interface da IDE).
 
-3. Alternatively, open the terminal, navigate to the cloned project folder, and run:
+3. Alternativamente, abra o terminal, navegue até a pasta do projeto clonado e execute:
     ```bash
     mvn spring-boot:run
     ```
 
-   This will download the dependencies and start the Tomcat server.
+   Isso irá baixar as dependências e iniciar o servidor Tomcat.
 
-## Usage
+## Uso
 
-With the server running, open your browser and go to:
+Com o servidor em execução, abra o navegador e acesse:
 [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
 
-In the Swagger interface, you will find all the endpoints listed with their request and response details.
+Na interface do Swagger, você encontrará todos os endpoints listados com os detalhes das requisições e respostas.
 
 ## Endpoints
 
 - **POST** `/products`  
-  Creates a new product.  
-  **Response**: 201 Created
+  Cria um novo produto.  
+  **Resposta**: 201 Created
 
 - **GET** `/products`  
-  Retrieves all products.  
-  **Response**: 200 OK
+  Recupera todos os produtos.  
+  **Resposta**: 200 OK
 
 - **GET** `/products/{id}`  
-  Retrieves a product by its ID.  
-  **Response**: 200 OK
+  Recupera um produto pelo seu ID.  
+  **Resposta**: 200 OK
 
 - **POST** `/products/{id}`  
-  Updates a product by specifying the ID.  
-  **Response**: 200 OK
+  Atualiza um produto especificando o ID.  
+  **Resposta**: 200 OK
 
 - **DELETE** `/products/{id}`  
-  Deactivates a product (instead of deleting it physically).  
-  **Response**: 200 OK
+  Inativa um produto (em vez de excluir fisicamente).  
+  **Resposta**: 200 OK
 
-## Tests
+## Testes
 
-To run tests, ensure the environment is set up and configured with the project. Navigate to `src/test/java/com/github/alex3g/product_ms` and run the `ProductMsApplicationTests` class.
+Para rodar os testes, certifique-se de que o ambiente está instalado e configurado com o projeto. Navegue até o caminho `src/test/java/com/github/alex3g/product_ms` e execute a classe `ProductMsApplicationTests`.
 
-## Contribution
+## Contribuição
 
-This project is for learning purposes only. However, if you want to contribute or make improvements, feel free to reach out.
+Este projeto é apenas para fins de aprendizado. No entanto, se você deseja contribuir ou fazer melhorias, sinta-se à vontade para entrar em contato.
 
-## Contact
+## Contato
 
 🔗 [LinkedIn](https://www.linkedin.com/in/alex--gaspar/)
-
----
-
-Read the Portuguese version [here](README.md).
