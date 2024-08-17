@@ -28,7 +28,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldCreateProduct() {
+    void shouldCreateProduct() throws Exception {
         ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
@@ -41,7 +41,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldGetAllProducts() {
+    void shouldGetAllProducts() throws Exception {
         ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
@@ -58,7 +58,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldGetProductById() {
+    void shouldGetProductById() throws Exception {
         ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
@@ -79,7 +79,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldNotGetProductById() {
+    void shouldNotGetProductById() throws Exception {
         ProductDTO request = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(request);
 
@@ -99,7 +99,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldUpdateProduct() {
+    void shouldUpdateProduct() throws Exception {
         ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
@@ -120,7 +120,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldNotUpdateProduct() {
+    void shouldNotUpdateProduct() throws Exception {
         ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
@@ -140,7 +140,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldInactiveProduct() {
+    void shouldInactiveProduct() throws Exception {
         ProductDTO productToInactive = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToInactive);
 
@@ -153,7 +153,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void shouldNotInactiveProduct() {
+    void shouldNotInactiveProduct() throws Exception {
         ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
