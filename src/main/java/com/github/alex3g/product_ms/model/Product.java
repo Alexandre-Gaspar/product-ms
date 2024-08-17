@@ -18,7 +18,7 @@ public class Product {
     )
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     @Schema(
             description = "Name of the product",
             example = "Monitor DELL"

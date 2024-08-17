@@ -27,7 +27,7 @@ public class ProductController {
     )
     @JsonView(Views.Public.class)
     @PostMapping
-    public ResponseEntity<ProductDTO> create(@RequestBody @Valid ProductDTO request) {
+    public ResponseEntity<ProductDTO> create(@RequestBody @Valid ProductDTO request) throws Exception {
         var response = this.productService.create(request);
         return response
                 .map(productDTO -> new ResponseEntity<>(productDTO, HttpStatus.CREATED))

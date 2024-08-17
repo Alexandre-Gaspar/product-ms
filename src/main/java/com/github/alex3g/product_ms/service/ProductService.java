@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    Optional<ProductDTO> create(ProductDTO request);
+    Optional<ProductDTO> create(ProductDTO request) throws Exception;
 
     List<ProductDTO> getAll();
 

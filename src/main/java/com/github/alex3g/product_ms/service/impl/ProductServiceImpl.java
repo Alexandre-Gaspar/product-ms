@@ -1,6 +1,7 @@
 package com.github.alex3g.product_ms.service.impl;
 
 import com.github.alex3g.product_ms.dto.ProductDTO;
+import com.github.alex3g.product_ms.exception.custom.ProductValidationException;
 import com.github.alex3g.product_ms.model.Product;
 import com.github.alex3g.product_ms.repository.ProductRepository;
 import com.github.alex3g.product_ms.service.ProductService;
@@ -23,9 +24,10 @@ public class ProductServiceImpl implements ProductService {
     private ModelMapper mapper;
 
     @Override
-    public Optional<ProductDTO> create(ProductDTO request) {
+    public Optional<ProductDTO> create(ProductDTO request) throws Exception {
         request.setAvailable(true);
         Product product = mapper.map(request, Product.class);
+        validateProduct(product.getName());
         this.repository.saveAndFlush(product);
 
         // create response
@@ -75,5 +77,14 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return Optional.empty();
+    }
+
+    public void validateProduct(String name) throws Exception{
+        Optional<Product> fetchedProductByName = this.repository.findByName(name);
+
+        if (fetchedProductByName.isPresent()) {
+            throw new ProductValidationException("Already exists a product with this name");
+        }
+
     }
 }

@@ -1,8 +1,6 @@
 package com.github.alex3g.product_ms.config;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springdoc.core.models.GroupedOpenApi;
-import org.springdoc.webmvc.api.OpenApiResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
