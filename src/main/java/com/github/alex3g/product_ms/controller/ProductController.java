@@ -72,7 +72,7 @@ public class ProductController {
                     required = true
             )
     )
-    @JsonView(Views.Public.class)
+    @JsonView(Views.Internal.class)
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id,
                                              @RequestBody @Valid ProductDTO request) {
