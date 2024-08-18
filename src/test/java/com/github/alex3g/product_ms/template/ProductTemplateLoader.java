@@ -10,21 +10,24 @@ public class ProductTemplateLoader implements TemplateLoader {
     @Override
     public void load() {
         Fixture.of(ProductDTO.class).addTemplate("valid", new Rule(){{
-            add("name", random("Monitor", "Iphone 15", "Macnook pro"));
-            add("description", "Monitor da marca DELL de 30 polegadas. Possui uma tela touch screen, que permite usar tocando na tela.");
-            add("price", random(Double.class, range(0.01, 199087.89)));
+            add("name", random("Smart TV 4K", "PlayStation 5", "Laptop Asus"));
+            add("description", "Smart TV 4K com painel LED de 55 polegadas e suporte a HDR10. Ideal para uma experiência de entretenimento imersiva.");
+            add("price", random(Double.class, range(100.00, 2999.99)));
         }});
+
         Fixture.of(ProductDTO.class).addTemplate("valid-update", new Rule(){{
-            add("name", random("Monitor DELL", "Iphone 15 pro", "Macbook air - m5"));
-            add("description", "Monitor da marca DELL de 30 polegadas. Possui uma tela touch screen, que permite usar tocando na tela.");
-            add("price", random(Double.class, range(200, 459087.89)));
+            add("name", random("Teclado Mecânico", "Monitor Dell UltraSharp", "Fone de Ouvido Bluetooth"));
+            add("description", "Teclado mecânico com switches RGB, design ergonômico e teclas anti-ghosting. Perfeito para gamers e digitadores.");
+            add("price", random(Double.class, range(50.00, 1499.99)));
         }});
+
         Fixture.of(Product.class).addTemplate("valid", new Rule(){{
-            add("id", random(Long.class, range(1L, 5L)));
-            add("name", random("Monitor", "Iphone 15", "Macbook pro", "Computador", "Airpods 11s"));
-            add("description", "Monitor da marca DELL de 30 polegadas. Possui uma tela touch screen, que permite usar tocando na tela.");
-            add("price", random(Double.class, range(0.01, 199087.89)));
+            add("id", random(Long.class, range(6L, 15L)));
+            add("name", random("Cadeira Gamer", "Tablet Samsung", "Smartwatch Apple", "Impressora Canon", "Drone DJI"));
+            add("description", "Cadeira gamer ergonômica com ajuste de altura e apoio para os pés. Ideal para longas sessões de jogos.");
+            add("price", random(Double.class, range(199.99, 4999.99)));
             add("isAvailable", true);
         }});
+
     }
 }

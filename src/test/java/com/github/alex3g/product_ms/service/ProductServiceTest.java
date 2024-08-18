@@ -52,9 +52,9 @@ public class ProductServiceTest {
         // Assert: Validate the fetched products
         assertNotNull(fetchedProducts, "Fetched products shouldn't be null");
 
-        assertEquals(createdProduct.get().getName(), fetchedProducts.getFirst().getName(), "Product name should match");
-        assertEquals(createdProduct.get().getDescription(), fetchedProducts.getFirst().getDescription(), "Product description should match");
-        assertEquals(createdProduct.get().getPrice(), fetchedProducts.getFirst().getPrice(), "Product price should match");
+        assertEquals(createdProduct.get().getName(), fetchedProducts.get(0).getName(), "Product name should match");
+        assertEquals(createdProduct.get().getDescription(), fetchedProducts.get(0).getDescription(), "Product description should match");
+        assertEquals(createdProduct.get().getPrice(), fetchedProducts.get(0).getPrice(), "Product price should match");
     }
 
     @Test
@@ -100,7 +100,7 @@ public class ProductServiceTest {
 
     @Test
     void shouldUpdateProduct() throws Exception {
-        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid-update");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
         assertTrue(createdProduct.isPresent(), "Product should be created successfully");
@@ -121,7 +121,7 @@ public class ProductServiceTest {
 
     @Test
     void shouldNotUpdateProduct() throws Exception {
-        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid-update");
         Optional<ProductDTO> createdProduct = service.create(productToCreate);
 
         assertTrue(createdProduct.isPresent(), "Product should be created successfully.");
@@ -164,7 +164,7 @@ public class ProductServiceTest {
         // Assert: Guarantees that both IDs doesn't match
         assertNotEquals(createdProduct.get().getId(), nonExistentId, "The generated ID shouldn't be match the created product ID");
 
-        // Attempt to inactive a product with a non-existent ID
+        // Attempt to inactivate a product with a non-existent ID
         boolean result = service.inactive(nonExistentId);
 
         // Assert: Guarantees that no product will be returned

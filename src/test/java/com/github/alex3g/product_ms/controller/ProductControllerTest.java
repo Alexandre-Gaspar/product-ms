@@ -80,7 +80,7 @@ public class ProductControllerTest {
         Product productToCreate = Fixture.from(Product.class).gimme("valid");
         repository.save(productToCreate);
 
-        Long id = repository.findAll().getFirst().getId();
+        Long id = repository.findAll().get(0).getId();
 
         mvc.perform(get("/products/{id}", id)
                         .header(AUTHORIZATION, "Bearer foo"))
@@ -120,7 +120,7 @@ public class ProductControllerTest {
 
     @Test
     void shouldNotUpdateProduct() throws Exception {
-        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid");
+        ProductDTO productToCreate = Fixture.from(ProductDTO.class).gimme("valid-update");
         Product createdProduct = repository.save(modelMapper.map(productToCreate, Product.class));
 
         Long nonExistentId = 999L;
