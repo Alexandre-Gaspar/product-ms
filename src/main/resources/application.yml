@@ -21,4 +21,4 @@ springdoc:
     title: "Product API"
     description: "API for products management with CRUD operations."
     version: OPENAPI_3_1
-  # api-docs.version: 1.0.0
+    api-docs.version: 1.0.0
